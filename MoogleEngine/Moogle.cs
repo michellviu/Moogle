@@ -98,7 +98,7 @@ public static class Moogle
             return d1.getScore().CompareTo(d2.getScore());
         });
         resultadoDoc.Reverse();
-        SearchItem[] items = new SearchItem[7];
+        SearchItem[] items = new SearchItem[resultadoDoc.Count()];
         for (int i = 0; i < items.Length; i++)
         {
             items[i] = new SearchItem(resultadoDoc[i].getNombre().Replace("\\", "/").Split("/").Last(), resultadoDoc[i].getSnippet(), resultadoDoc[i].getScore());

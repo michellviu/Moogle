@@ -13,7 +13,7 @@ public static class MetodosAdicionales
             query = Regex.Replace(query, @"[^\w\s]", "");
             words = query.Split(' ');
             words = words.Distinct().ToArray();
-            string[] items = new string[] { "en", "su", "la", "lo", "las", "los", "el", "por", "a", "con", "de", "y", "o", "u", "e", "es", "que", "del", "ella", "the", "in", "you", "he", "she", "they","your" };
+            string[] items = new string[] { "en","la", "lo", "las", "los", "el", "a", "con", "de", "y", "o", "u", "e", "del", "ella", "the", "in", "you", "he", "she", "they","your" };
             for (int j = 0; j < items.Length; j++)
             {
                 string item = items[j];
