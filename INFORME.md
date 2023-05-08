@@ -83,8 +83,7 @@ Por ultimo el metodo `Query` retorna nuevo objeto de tipo `SearchResult` que rec
 >Mediante su ejecucion se le pueden añadir nuevos documentos a la carpeta Content.
 >Se puede realizar la busqueda de varios terminos.
 >El proyecto cuanta con una base de datos de 100 MB de archivos .txt
->Como resultado solo se muestran los 7 archivos con mas relevancia para la busqueda.
->El score del documento representa la `RELEVANCIA`(no la `IMPORTANCIA`) de ese documento para la busqueda, por tanto pueden aparecer documentos que no contengan todos los terminos buscados con mas relevancia que otro documento que si contenga todos los terminos, esto de debe a la frecuencia con que aparezcan los elementos de la busqueda en cada documento.
+>El score del documento representa la `RELEVANCIA` de ese documento para la busqueda, por tanto pueden aparecer documentos que no contengan todos los terminos buscados con mas relevancia que otro documento que si contenga todos los terminos, esto de debe a la frecuencia con que aparezcan los elementos de la busqueda en cada documento.
 
 **Espero que este informe haya sido útil y que el proyecto haya alcanzado las espectativas.**
 
