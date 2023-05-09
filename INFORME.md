@@ -56,7 +56,7 @@ El siguiente paso es actualizar el diccionario del objeto `doc` de tipo `Documen
 Ahora nos quedaría actualizar la variable `palabrasIDF` de tipo Dictionary ya que ese `terminoBuscado` aparece al menos en un documento. Para ello creamos una nueva variable de tipo int llamada `cantidaddedocumentos` que representara la cantidad de documentos en que aparece `terminoBuscado` para ello utilizamos una condicional, dentro de ella utilizamos el metodo `TryGetValue` de la clase `Dictionary`, si entramos en la condicional aumentamos en 1 la variable `cantidaddedocumentos` y acutalizamos `palabrasIDF` asignandole a `terminoBuscado`(key) el valor de `cantidaddedocumentos`, en caso contrario sabremos que es el primer documento donde aparece `terminoBuscado` por tanto actualizamos `palabrasIDF` asignandole a `terminoBuscado`(key) el valor 1.
 Luego de terminar el segundo ciclo realizamos una condicional if preguntando por `flag` en caso de ser true sabremos que al menos un `terminoBuscado` aparece en `doc` por tanto lo agregamos a nuestra lista `resultadoDoc` con el metodo `Add` de la clase `List`.
 
-Por ultimo nos quedaria recorrer la lista `resultadoDoc` y hacer el calculo del `score` de cada documento y luego organizarlos en orden descendiente para tener en la primera posicion al documento que mas `score` posea para esa busqueda, para ello utilizaremos la formula de TF(frecuencia del termino)*IDF(frecuencia inversa), el TF se calcula dividiendo la cantidad de veces que aparece un `terminoBuscado` entre la cantidad de palabras de ese documento y el IDF se calcula mediante el logaritmo en base 2 de la cantidad de archivos entre la cantidad de archivos en que aparece dicho `terminoBuscado`, luego calculamos la sumatoria del `TF*IDF` de cada uno de los `terminosBuscados` y ese valor representará el `score` del documento, para esto creamos dos variables de tipo int una se va a llamar `tf` y la otra `idf` y utilizamos el metodo `ForEach` de la clase `List` para recorrer la lista `resultadoDoc`, luego creamos una variable `score` de tipo float y entramos en un ciclo for para recorrer cada uno de los `terminosBuscados` y hacer el calculo del `score`, luego con el metodo `getDictionary` de la clase `Documentos` y el metodo `TryGetValue` de la clase `Dictionary` le asignamos valor al `tf` de terminosBuscados[i], igualmente con el diccionario `palabrasIDF` y el metodo `TryGetValue` le asignamos valor al `idf`de terminosBuscados[i], luego usando una condicional if y preguntando si `tf` es mayor que cero realizamos el calculo del `score` con los terminos `tf` e `idf` y se lo sumamos a la variable `score`, en caso de no entrar en la condicional simplemente le sumamos 0 al `score` porque ese termino no aparece en ese documente, luego de calculado el `score` total del documento se lo introducimos al documento con el metodo `setScore` de la clase `Documentos`.
+Por ultimo nos quedaria recorrer la lista `resultadoDoc` y hacer el calculo del `score` de cada documento y luego organizarlos en orden descendiente para tener en la primera posicion al documento que mas `score` posea para esa busqueda, para ello utilizaremos la formula de TF(frecuencia del termino)*IDF(frecuencia inversa), el TF se calcula dividiendo la cantidad de veces que aparece un `terminoBuscado` entre la cantidad de palabras de ese documento y el IDF se calcula mediante el logaritmo en base 2 de la cantidad de archivos entre la cantidad de archivos en que aparece dicho `terminoBuscado`, luego calculamos la sumatoria del `TF*IDF` de cada uno de los `terminosBuscados` y ese valor representará el `score` del documento, para esto creamos dos variables de tipo int una se va a llamar `tf` y la otra `idf` y utilizamos el metodo `ForEach` de la clase `List` para recorrer la lista `resultadoDoc`, luego creamos una variable `score` de tipo float y entramos en un ciclo for para recorrer cada uno de los `terminosBuscados` y hacer el calculo del `score`, luego con el metodo `getDictionary` de la clase `Documentos` y el metodo `TryGetValue` de la clase `Dictionary` le asignamos valor al `tf` de terminosBuscados[i], igualmente con el diccionario `palabrasIDF` y el metodo `TryGetValue` le asignamos valor al `idf`de terminosBuscados[i], luego usando una condicional if y preguntando si `tf` es mayor que cero realizamos el calculo del `score` con los terminos `tf` e `idf` y se lo sumamos a la variable `score`, en caso de no entrar en la condicional simplemente le sumamos 0 al `score` porque ese termino no aparece en ese documente, luego de calculado el `score` total del documento los multiplicamos por la cantidad de palabras de la query que contiene ese documento, dandole mas relevancia a los documentos que mas cantidad de palabras de la query contienen, luego se lo introducimos al documento con el metodo `setScore` de la clase `Documentos`.
 Ej:
 ```cs
 int idf;
@@ -64,15 +64,21 @@ int tf;
 resultadoDoc.ForEach(d =>
 {
    float score = 0;
+   int palabras;
    for (int i = 0; i < terminosBUscados.Length; i++)
    {
      d.getDictionay().TryGetValue(terminosBUscados[i], out tf);
      palabrasIDF.TryGetValue(terminosBUscados[i], out idf);
      if (tf > 0)
-     score += ((float)tf / d.getCantidadDePalabras()) * (float)Math.Log2((float)archivos.Length / idf);
+     {
+      palabras++;
+      score += ((float)tf / d.getCantidadDePalabras()) * (float)Math.Log2((float)archivos.Length / idf);
+     }
+     
      else score += 0;
     }
-  d.setScore(score);
+    score=score+palabras;
+    d.setScore(score);
 });
 ```
 Posteriormente organizo la lista `resultadoDoc` con el metodo `Sort` de la clase `List` en dependencia del tamaño del `score`.
@@ -82,8 +88,8 @@ Por ultimo el metodo `Query` retorna nuevo objeto de tipo `SearchResult` que rec
 ## Observaciones
 >Mediante su ejecucion se le pueden añadir nuevos documentos a la carpeta Content.
 >Se puede realizar la busqueda de varios terminos.
->El proyecto cuanta con una base de datos de 100 MB de archivos .txt
->El score del documento representa la `RELEVANCIA` de ese documento para la busqueda, por tanto pueden aparecer documentos que no contengan todos los terminos buscados con mas relevancia que otro documento que si contenga todos los terminos, esto de debe a la frecuencia con que aparezcan los elementos de la busqueda en cada documento.
+>El proyecto cuenta con una base de datos de 100 MB de archivos .txt
+>El score del documento representa la `RELEVANCIA` de ese documento para la busqueda, por tanto pueden aparecer documentos que contienen menor cantidad de terminos buscados (no es asi generalmente) que otros que contengan mas, esto de debe a la frecuencia con que aparezcan los elementos de la busqueda en cada documento y la cantidad de palabras que contiene el documento.
 
 **Espero que este informe haya sido útil y que el proyecto haya alcanzado las espectativas.**
 

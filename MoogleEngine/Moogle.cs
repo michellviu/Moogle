@@ -8,8 +8,8 @@ public static class Moogle
     {
         /////////////////////////////////////
         string relativePath = "../Content";
-        string fullPath = Path.Combine(Directory.GetCurrentDirectory(),relativePath);
-        string[] archivos = Directory.GetFiles(fullPath,"*.txt"); //Cargar los documentos
+        string fullPath = Path.Combine(Directory.GetCurrentDirectory(), relativePath);
+        string[] archivos = Directory.GetFiles(fullPath, "*.txt"); //Cargar los documentos
 
         var terminosBUscados = MetodosAdicionales.ArrayQuery(query);
 
@@ -82,14 +82,20 @@ public static class Moogle
         resultadoDoc.ForEach(d =>
         {
             float score = 0;
+            int palabras = 0;
             for (int i = 0; i < terminosBUscados.Length; i++)
             {
                 d.getDictionay().TryGetValue(terminosBUscados[i], out tf);
                 palabrasIDF.TryGetValue(terminosBUscados[i], out idf);
                 if (tf > 0)
+                {
+                    palabras++;
                     score += ((float)tf / d.getCantidadDePalabras()) * (float)Math.Log2((float)archivos.Length / idf);
+                }
+
                 else score += 0;
             }
+            score = score * palabras;
             d.setScore(score);
         });
 
