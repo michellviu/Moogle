@@ -1,0 +1,8 @@
+\contentsline {section}{\numberline {1}Introducción}{3}{}%
+\contentsline {section}{\numberline {2}Clases}{3}{}%
+\contentsline {subsection}{\numberline {2.1}Clase MétodosAdicionales}{3}{}%
+\contentsline {subsection}{\numberline {2.2}Clase Matriz }{3}{}%
+\contentsline {subsubsection}{\numberline {2.2.1}Métodos de la clase Matriz}{4}{}%
+\contentsline {subsection}{\numberline {2.3}Clase Documentos}{4}{}%
+\contentsline {section}{\numberline {3}Ejecución y funcionamiento del método Query}{5}{}%
+\contentsline {section}{\numberline {4}Observaciones}{9}{}%
