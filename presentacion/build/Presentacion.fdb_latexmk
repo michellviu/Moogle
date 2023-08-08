@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1690166120 "d:/Moogle/Presentacion-Latex/Presentacion.tex" "build/Presentacion.pdf" "Presentacion" 1690166121 0
+["pdflatex"] 1691365813 "d:/Moogle/presentacion/presentacion.tex" "build/presentacion.pdf" "presentacion" 1691365813 0
   "C:/Users/miche/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1690030200 80909 eab91d9745dd2edfd62a31d53cd5fe15 ""
   "C:/Users/miche/AppData/Local/MiKTeX/fonts/pk/ljfour/jknappen/ec/dpi600/tcrm1000.pk" 1690083853 11548 b886bdfd09235cbb4ff4b6b8bad74e20 ""
   "C:/Users/miche/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1690031376 23178960 dea8d8c95d8ddd4054ef208a2dad9b37 ""
@@ -35,16 +35,16 @@
   "C:/Users/miche/AppData/Local/Programs/MiKTeX/tex/latex/graphics/keyval.sty" 1665067579 2671 7e67d78d9b88c845599a85b2d41f2e39 ""
   "C:/Users/miche/AppData/Local/Programs/MiKTeX/tex/latex/graphics/trig.sty" 1665067579 4023 293ea1c16429fc0c4cf605f4da1791a9 ""
   "C:/Users/miche/AppData/Local/Programs/MiKTeX/tex/latex/l3backend/l3backend-pdftex.def" 1680182075 29768 5600b3a98028e2e01b60e7f98fbf4b9c ""
-  "Presentacion.tex" 1690166118 3776 db0cc7df4c201418dda3caaca0338c02 ""
   "build/Moogle.png" 1690161865 13485 4a99356dd4875b0233be2a9d6e403efb ""
-  "build/Presentacion.aux" 1690166121 467 728f01e970be6ca413e5e719abe78b94 "pdflatex"
-  "build/Presentacion.toc" 1690166121 191 bda23f50c4fe6d0922171391cf3f7a55 "pdflatex"
-  "build/flujoM.png" 1690165339 30259 ecb524b2522d46916081382e91ee4aa0 ""
+  "build/flujoM.png" 1691365716 29711 4e982b72e2b3b0b0ad1c152fd101946e ""
   "build/matcom.jpg" 1690028784 4709 d9d536049a0557a24d8b67cbb6cf52fa ""
-  "d:/Moogle/Presentacion-Latex/Presentacion.tex" 1690166118 3776 db0cc7df4c201418dda3caaca0338c02 ""
+  "build/presentacion.aux" 1691365813 467 9e9fbfc2f0fe0de89ff5c24a8a0a823c "pdflatex"
+  "build/presentacion.toc" 1691365813 191 d6a288c5e3ae062c4bc4bdcac54073d1 "pdflatex"
+  "d:/Moogle/presentacion/presentacion.tex" 1691365275 5792 d4eb81bd875ee65bcf06970de838cd7c ""
+  "presentacion.tex" 1691365275 5792 d4eb81bd875ee65bcf06970de838cd7c ""
   (generated)
-  "build/Presentacion.aux"
-  "build/Presentacion.log"
-  "build/Presentacion.pdf"
-  "build/Presentacion.toc"
+  "build/presentacion.aux"
+  "build/presentacion.log"
+  "build/presentacion.pdf"
+  "build/presentacion.toc"
   (rewritten before read)

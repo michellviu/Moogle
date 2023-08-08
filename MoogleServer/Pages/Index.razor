@@ -37,8 +37,8 @@
 @code {
     private string query = "";
     private SearchResult result = new SearchResult();
-
+    private Datos datos = Datos.getInstance();
     private void RunQuery() {
-        result = Moogle.Query(query);
+        result = Moogle.Query(query,datos);
     }
 }

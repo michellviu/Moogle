@@ -2,23 +2,17 @@
 
 public class Documentos
 {
-    string nombreDocumento ;
-    float score = 0;
-    int cantidadDePalabras;
+    string nombreDocumento;
+    double score = 0;
     string[] contenido;
     string snippet;
-    Dictionary<string, int> palabrasTF;
-    public Documentos(string nombreDoc, int longitud, string[] contenido)
+    Dictionary<string, string> DiccSnippet;
+    public Documentos(string nombreDoc, string[] contenido)
     {
         nombreDocumento = nombreDoc;
-        palabrasTF = new Dictionary<string, int>();
-        cantidadDePalabras = longitud;
         snippet = "";
         this.contenido = contenido;
-    }
-    public string[] getContenido()
-    {
-        return this.contenido;
+        this.DiccSnippet = new Dictionary<string, string>();
     }
     public void setSnippet(string snippet)
     {
@@ -28,24 +22,14 @@ public class Documentos
     {
         return this.snippet;
     }
-    public void setScore(float score)
+    public void setScore(double score)
     {
         this.score = score;
     }
-    public int getCantidadDePalabras()
-    {
-        return this.cantidadDePalabras;
-    }
-    public Dictionary<string, int> getDictionay()
-    {
-        return this.palabrasTF;
-    }
-
-    public float getScore()
+    public double getScore()
     {
         return this.score;
     }
-
     public string getNombre()
     {
         return this.nombreDocumento;
@@ -57,4 +41,25 @@ public class Documentos
         else
             this.snippet += "..." + snippet;
     }
+    public bool AddScore(double score)
+    {
+        double scoreAnterior = this.score;
+        this.score += score;
+        return this.score > scoreAnterior;
+    }
+    public void ResetScore()
+    {
+        this.score = 0;
+    }
+
+    public void ResetSnippet()
+    {
+        this.snippet = "";
+    }
+
+    public Dictionary<string, string> getDictionay()
+    {
+        return this.DiccSnippet;
+    }
+
 }

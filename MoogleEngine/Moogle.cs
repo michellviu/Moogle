@@ -1,113 +1,70 @@
 ﻿using System;
 using System.IO;
 using System.Text.RegularExpressions;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
 namespace MoogleEngine;
 public static class Moogle
 {
-    public static SearchResult Query(string query)
+    public static SearchResult Query(string query, Datos p)
     {
-        /////////////////////////////////////
-        string relativePath = "../Content";
-        string fullPath = Path.Combine(Directory.GetCurrentDirectory(), relativePath);
-        string[] archivos = Directory.GetFiles(fullPath, "*.txt"); //Cargar los documentos
-
-        var terminosBUscados = MetodosAdicionales.ArrayQuery(query);
-
-        //Lista que contendra el listado de documentos con sus palabras y cada una con su TF
-        var resultadoDoc = new List<Documentos>();
-        //Variable que contendra los terminos buscados y en cuantos documentos aparece
-        var palabrasIDF = new Dictionary<string, int>();
-
-        for (int i = 0; i < archivos.Length; i++)
-        {   //Leer cada documento
-            string contenido = File.ReadAllText(archivos[i]);
-            // Normalizar convirtiendo todo el texto a minúsculas, eliminar saltos de linea, caracteres especiales
-            contenido = contenido.ToLower().Replace("á", "a").Replace("é", "e").Replace("í", "i").Replace("ó", "o").Replace("ú", "u");
-            contenido = Regex.Replace(contenido, @"[^\w\s]", "");
-            contenido = contenido.Replace("\n", " ");
-
-            // documentos que se almacenara en la lista de resultadoDoc
-
-            var alltext = contenido.Split(" ");
-            var doc = new Documentos(archivos[i], alltext.Length, alltext);
-            bool flag = false;
-            //Guardar el idf de cada palabra
-
-            for (int j = 0; j < terminosBUscados.Length; j++)
+        string[] busqueda = MetodosAdicionales.Normaliza(query);
+        //Crear vector consulta
+        double[] vectorcosulta = new double[p.terminosunicos.Count()];
+        for (int i = 0; i < p.terminosunicos.Count(); i++)
+        {
+            var terminounico = p.terminosunicos[i];
+            int cont = 0;
+            for (int j = 0; j < busqueda.Length; j++)
             {
-                var terminoBuscado = terminosBUscados[j];
-                int cont = 0;
-                // si encuentra el termino marca que lo encontro y cuenta
-                int aux = -1;
-                for (int k = 0; k < alltext.Length; k++)
+                if (busqueda[j].Equals(terminounico))
                 {
-
-                    if (alltext[k].Equals(terminoBuscado))
-                    {
-                        cont++;
-                        if (aux == -1)
-                        {
-                            aux = k;
-                            int snippetStart = Math.Max(0, k - 4);
-                            int snippetEnd = Math.Min(doc.getContenido().Length - 1, k + 4);
-                            string snippet = MetodosAdicionales.SubString(alltext, snippetStart, snippetEnd, terminoBuscado);
-                            doc.AddSnippet(snippet);
-                        }
-                    }
-                }
-                if (cont > 0)
-                {
-                    flag = true;
-                    //Actualizar diccionario del dodumento para el termino buscado TF
-                    doc.getDictionay().Add(terminoBuscado, cont);
-                    //ACTUALIZAR IDF
-                    int cantDocumentos;
-                    if (palabrasIDF.TryGetValue(terminoBuscado, out cantDocumentos))
-                    {
-                        cantDocumentos++;//aumentando en uno
-                        palabrasIDF[terminoBuscado] = cantDocumentos;
-                    }
-                    else
-                    {
-                        palabrasIDF.Add(terminoBuscado, 1);
-                    }
+                    cont++;
                 }
             }
-            if (flag)
-                resultadoDoc.Add(doc);
+
+            vectorcosulta[i] = (double)cont / busqueda.Length;
         }
-        //Recorrer lista de resultadoDoc y por cada elemento hacer el calculo del score de su Query
-        int idf;
-        int tf;
-        resultadoDoc.ForEach(d =>
+        //Calcular similitud entre la consulta y cada uno de los documentos
+        //multiplicando la matrizTfIdf por vector consulta
+
+        List<Documentos> a = new List<Documentos>();
+
+        for (int i = 0; i < p.archivos.Length; i++)
         {
-            float score = 0;
-            int palabras = 0;
-            for (int i = 0; i < terminosBUscados.Length; i++)
+            p.resultadoDoc[i].ResetScore();
+            p.resultadoDoc[i].ResetSnippet();
+            double productoEscalar = 0.0;
+            double longitudDocumento = 0.0;
+            double longitudQuery = 0.0;
+            for (int j = 0; j < p.terminosunicos.Count(); j++)
             {
-                d.getDictionay().TryGetValue(terminosBUscados[i], out tf);
-                palabrasIDF.TryGetValue(terminosBUscados[i], out idf);
-                if (tf > 0)
+                productoEscalar += p.matrizTfIdf[j, i] * vectorcosulta[j];
+                longitudDocumento += Math.Pow(p.matrizTfIdf[j, i], 2);
+                longitudQuery += Math.Pow(vectorcosulta[j], 2);
+                if (p.resultadoDoc[i].AddScore((p.matrizTfIdf[j, i] * vectorcosulta[j])))
                 {
-                    palabras++;
-                    score += ((float)tf / d.getCantidadDePalabras()) * (float)Math.Log2((float)archivos.Length / idf);
+                    p.resultadoDoc[i].AddSnippet(p.resultadoDoc[i].getDictionay()[p.terminosunicos[j]]);
                 }
-
-                else score += 0;
             }
-            score = score * palabras;
-            d.setScore(score);
-        });
-
-        resultadoDoc.Sort((d1, d2) =>
-        {
-            return d1.getScore().CompareTo(d2.getScore());
-        });
-        resultadoDoc.Reverse();
-        SearchItem[] items = new SearchItem[resultadoDoc.Count()];
+            longitudDocumento = Math.Sqrt(longitudDocumento);
+            longitudQuery = Math.Sqrt(longitudQuery);
+            p.resultadoDoc[i].setScore(productoEscalar / (longitudDocumento * longitudQuery));
+            if (p.resultadoDoc[i].getScore() > 0)
+            {
+                a.Add(p.resultadoDoc[i]);
+            }
+        }
+        //Ordenar los documentos por similitud
+        a.Sort((d1, d2) =>
+            {
+                return d2.getScore().CompareTo(d1.getScore());
+            });
+        SearchItem[] items = new SearchItem[a.Count()];
         for (int i = 0; i < items.Length; i++)
         {
-            items[i] = new SearchItem(resultadoDoc[i].getNombre().Replace("\\", "/").Split("/").Last(), resultadoDoc[i].getSnippet(), resultadoDoc[i].getScore());
+            items[i] = new SearchItem(a[i].getNombre(), a[i].getSnippet(), (float)a[i].getScore());
         }
         ///////////////////////////////////////
         return new SearchResult(items, query);

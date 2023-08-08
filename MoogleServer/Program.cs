@@ -2,6 +2,8 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 
 var builder = WebApplication.CreateBuilder(args);
+//Inicializar la base de datos
+Datos.getInstance();
 
 // Add services to the container.
 builder.Services.AddRazorPages();

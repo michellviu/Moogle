@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1690159537 "d:/Moogle/Informe-Latex/main.tex" "build/main.pdf" "main" 1690159538 0
+["pdflatex"] 1691527553 "d:/Moogle/Informe-Latex/informe.tex" "build/informe.pdf" "informe" 1691527554 0
   "C:/Users/miche/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1690030200 80909 eab91d9745dd2edfd62a31d53cd5fe15 ""
   "C:/Users/miche/AppData/Local/MiKTeX/fonts/pk/ljfour/jknappen/ec/dpi600/tcrm1000.pk" 1690083853 11548 b886bdfd09235cbb4ff4b6b8bad74e20 ""
   "C:/Users/miche/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1690031376 23178960 dea8d8c95d8ddd4054ef208a2dad9b37 ""
@@ -19,22 +19,20 @@
   "C:/Users/miche/AppData/Local/Programs/MiKTeX/fonts/tfm/public/cm/cmti10.tfm" 1136768653 1480 aa8e34af0eb6a2941b776984cf1dfdc4 ""
   "C:/Users/miche/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx10.pfb" 1247596666 34811 78b52f49e893bcba91bd7581cdc144c0 ""
   "C:/Users/miche/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb" 1247596666 32080 340ef9bf63678554ee606688e7b5339d ""
-  "C:/Users/miche/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb" 1247596667 36299 5f9df58c2139e7edcf37c8fca4bd384d ""
   "C:/Users/miche/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb" 1247596667 35752 024fb6c41858982481f6968b5fc26508 ""
   "C:/Users/miche/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb" 1247596667 32722 d7379af29a190c3f453aba36302ff5a9 ""
   "C:/Users/miche/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr17.pfb" 1247596666 32362 bc3f3eec7ab7d65fe700963d4017d32c ""
-  "C:/Users/miche/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb" 1247596667 32569 5e5ddc8df908dea60932f3c484a54c0d ""
   "C:/Users/miche/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti10.pfb" 1247596667 37944 359e864bd06cde3b1cf57bb20757fb06 ""
   "C:/Users/miche/AppData/Local/Programs/MiKTeX/tex/latex/base/article.cls" 1669847796 20144 d5ecf0a5140c8d8d8b72cbe86e320eff ""
   "C:/Users/miche/AppData/Local/Programs/MiKTeX/tex/latex/base/size10.clo" 1669847796 8448 c33a4e1cb35cee9b33c2b21033b73e39 ""
   "C:/Users/miche/AppData/Local/Programs/MiKTeX/tex/latex/l3backend/l3backend-pdftex.def" 1680182075 29768 5600b3a98028e2e01b60e7f98fbf4b9c ""
-  "build/main.aux" 1690159538 919 7ab624877b7d8815fd7f3e4afeb5c4b9 "pdflatex"
-  "build/main.toc" 1690159538 559 16cf9ac8f521e34ac56269ef85dafc02 "pdflatex"
-  "d:/Moogle/Informe-Latex/main.tex" 1690159536 18103 1a44b9d68cf769701ecd8397655b1dde ""
-  "main.tex" 1690159536 18103 1a44b9d68cf769701ecd8397655b1dde ""
+  "build/informe.aux" 1691527554 1142 e4d04d1bc20543b983b55e91f50c9bc0 "pdflatex"
+  "build/informe.toc" 1691527554 700 c92fcb0e31cee18b3c54127498fb1606 "pdflatex"
+  "d:/Moogle/Informe-Latex/informe.tex" 1691527552 17311 2d153104eb20eaa1ab8fb2564a683349 ""
+  "informe.tex" 1691527552 17311 2d153104eb20eaa1ab8fb2564a683349 ""
   (generated)
-  "build/main.aux"
-  "build/main.log"
-  "build/main.pdf"
-  "build/main.toc"
+  "build/informe.aux"
+  "build/informe.log"
+  "build/informe.pdf"
+  "build/informe.toc"
   (rewritten before read)

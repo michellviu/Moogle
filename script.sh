@@ -40,7 +40,7 @@ show_slides() {
 # Función: Limpiar archivos auxiliares
 clean() {
   echo "Limpiando archivos auxiliares..."
-  rm -f *.aux *.log *.out *.toc
+  rm -f *.aux *.log *.out *.toc *.pdf
 }
 # Menú principal
 menu() {

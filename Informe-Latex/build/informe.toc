@@ -4,5 +4,7 @@
 \contentsline {subsection}{\numberline {2.2}Clase Matriz }{3}{}%
 \contentsline {subsubsection}{\numberline {2.2.1}Métodos de la clase Matriz}{4}{}%
 \contentsline {subsection}{\numberline {2.3}Clase Documentos}{4}{}%
-\contentsline {section}{\numberline {3}Ejecución y funcionamiento del método Query}{5}{}%
-\contentsline {section}{\numberline {4}Observaciones}{9}{}%
+\contentsline {subsection}{\numberline {2.4}Clase Datos}{5}{}%
+\contentsline {subsubsection}{\numberline {2.4.1}Método Procesamiento}{6}{}%
+\contentsline {section}{\numberline {3}Ejecución y funcionamiento del método Query}{8}{}%
+\contentsline {section}{\numberline {4}Observaciones}{8}{}%
